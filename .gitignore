@@ -1,0 +1,32 @@
+# Sensitive files
+.ssh/
+*.pem
+*.key
+*_rsa*
+*token*
+*secret*
+*password*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/settings.json
+
+# Environment specific
+.env
+.env.local
+
+# Cache and logs
+*.log
+cache/
+tmp/
