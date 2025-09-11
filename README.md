@@ -4,7 +4,7 @@ A clean, organized collection of dotfiles optimized for modern CLI workflows. Bu
 
 ## Philosophy
 
-Moving away from oh-my-zsh bloat toward a curated, maintainable setup. Focus on tools that enhance productivity without adding unnecessary overhead.
+Moving away from config file bloat toward a curated, maintainable setup. Focus on tools that enhance productivity without adding unnecessary overhead.
 
 ## Core Tools
 
@@ -48,6 +48,7 @@ cd ~/.dotfiles
 ## Quick Setup
 
 ### Essential CLI Tools
+
 ```bash
 # Install modern CLI replacements
 brew install starship zsh-autosuggestions zsh-syntax-highlighting
@@ -55,6 +56,7 @@ brew install lazygit neovim lsd fzf bat
 ```
 
 ### Symlink Key Files
+
 ```bash
 # Zsh configuration
 ln -sf ~/.dotfiles/zsh/.zshrc ~/.zshrc
@@ -69,6 +71,7 @@ ln -sf ~/.dotfiles/starship/starship.toml ~/.config/starship.toml
 ## Development Focus
 
 Optimized for:
+
 - **Frontend Development** (JavaScript, Node.js, React)
 - **WordPress Development** (PHP, Composer, WP-CLI)
 - **Full-Stack Workflows** (Laravel learning path)
@@ -77,6 +80,7 @@ Optimized for:
 ## Project Management
 
 Quick access aliases for common development paths:
+
 - WordPress themes and plugins
 - Bedrock/Sage projects
 - Sandbox environments
