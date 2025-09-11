@@ -1,63 +1,96 @@
 # Red's Dotfiles
 
-A clean, organized collection of dotfiles optimized for modern CLI workflows. Built around a minimal zsh setup with contemporary development tools.
+A clean, organized collection of dotfiles optimized for modern CLI workflows. Built around a minimal zsh setup with contemporary development tools, managed with GNU Stow for easy deployment and maintenance.
 
 ## Philosophy
 
-Moving away from config file bloat toward a curated, maintainable setup. Focus on tools that enhance productivity without adding unnecessary overhead.
+Moving away from config file bloat toward a curated, maintainable setup. Focus on tools that enhance productivity without adding unnecessary overhead. Using Stow for symlink management ensures consistent deployments across machines.
 
 ## Core Tools
 
-- **Shell**: Zsh (minimal, no oh-my-zsh)
+- **Shell**: Zsh with modern enhancements
 - **Prompt**: Starship
 - **Git UI**: Lazygit
-- **Editor**: Neovim/LazyVim (+ VS Code/Cursor)
-- **File Listing**: LSD
-- **Terminal Enhancements**: zsh-autosuggestions, zsh-syntax-highlighting
+- **Editor**: Neovim/LazyVim + VS Code/Cursor
+- **File Management**: LSD for enhanced directory listings
+- **Package Management**: Stow for dotfile deployment
 
 ## Structure
 
-```
+```shell
 .dotfiles/
-├── bin/           # Custom scripts and executables
-├── cursor/        # Cursor editor configurations
-├── docker/        # Docker-related configurations
-├── git/           # Git configurations and aliases
-├── homebrew/      # Brew bundle and package lists
-├── macos/         # macOS system preferences
-├── node/          # Node.js and npm configurations
-├── php/           # PHP and Composer configurations
-├── python/        # Python environment setup
-├── script/        # Installation and setup scripts
-├── vscode/        # VS Code settings and extensions
-├── wordpress/     # WordPress development tools
-└── zsh/           # Zsh configuration and aliases
+├── .git/                   # Git repository metadata
+├── README.md               # This documentation
+├── bootstrap/              # Initial setup scripts (planned)
+├── scripts/                # Utility scripts
+│   └── move-to-stow.sh         # Migration helper script
+└── stow/                   # Stow packages (symlink sources)
+  ├── bin/                    # Custom scripts and executables
+  ├── cursor/               # Cursor editor configurations
+  ├── docker/               # Docker-related configurations
+  ├── git/                  # Git configurations and GitHub CLI
+  ├── homebrew/             # Brew bundle and package lists
+  ├── macos/                # macOS system preferences
+  ├── node/                 # Node.js and npm configurations
+  ├── php/                  # PHP and Composer configurations
+  ├── python/               # Python environment setup
+  ├── raycast/              # Raycast configurations and scripts
+│   ├── applescripts/          # AppleScript extensions
+│   ├── obsidian/              # Obsidian integration scripts
+│   ├── shell/                 # Shell command extensions
+│   └── wordpress/             # WordPress-specific scripts
+  ├── vscode/               # VS Code settings and extensions
+  ├── wordpress/            # WordPress development tools
+  └── zsh/                  # Zsh configuration and aliases
 ```
 
-## Installation
+## Configuration Status
 
-```bash
+**Currently in `.config/` (managed):**
+
+- `starship.toml` → Needs migration to `stow/starship/`
+- `nvim/` → Needs migration to `stow/nvim/`
+- `raycast/` → Needs migration to `stow/raycast/`
+- `gh/` → Should move into `stow/gh/`
+
+**Root configs to migrate:**
+
+- `.gitconfig`, `.gitignore_global`, `.gitmessage` → `stow/git/`
+- `.zshrc`, `.zprofile`, `.p10k.zsh` → `stow/zsh/`
+- Node/npm configs → `stow/node/`
+
+## Installation & Usage
+
+### Prerequisites
+
+```shell
+# Install Stow (if not already installed)
+brew install stow
+
 # Clone repository
-git clone https://github.com/yourusername/dotfiles.git ~/.dotfiles
-
-# Run installation script
+git clone <your-repo-url> ~/.dotfiles
 cd ~/.dotfiles
-./script/bootstrap
 ```
 
-## Quick Setup
+## Quick Commands
 
-### Essential CLI Tools
+```Shell
+# List current stow packages
+ls ~/.dotfiles/stow/
 
-```bash
-# Install modern CLI replacements
-brew install starship zsh-autosuggestions zsh-syntax-highlighting
-brew install lazygit neovim lsd fzf bat
+# Check what files would be symlinked
+stow --dir=~/.dotfiles/stow --target=~/ --simulate <package>
+
+# Remove a stow package deployment  
+stow --dir=~/.dotfiles/stow --target=~/ --delete <package>
+
+# Restow (useful after config changes)
+stow --dir=~/.dotfiles/stow --target=~/ --restow <package>
 ```
 
-### Symlink Key Files
+### Deploy Individual Packages
 
-```bash
+```shell
 # Zsh configuration
 ln -sf ~/.dotfiles/zsh/.zshrc ~/.zshrc
 
@@ -66,6 +99,20 @@ ln -sf ~/.dotfiles/git/.gitconfig ~/.gitconfig
 
 # Starship prompt
 ln -sf ~/.dotfiles/starship/starship.toml ~/.config/starship.toml
+```
+
+### Safe Migration Process
+
+```shell
+# Test deployment first (dry run)
+stow --dir=~/.dotfiles/stow --target=~/ --simulate git --verbose
+
+# Create backup before migration
+cp ~/.gitconfig ~/dotfiles_backup_$(date +%Y%m%d)/
+
+# Copy to stow structure, then deploy
+cp ~/.gitconfig ~/.dotfiles/stow/git/
+stow --dir=~/.dotfiles/stow --target=~/ git
 ```
 
 ## Development Focus
@@ -79,26 +126,33 @@ Optimized for:
 
 ## Project Management
 
-Quick access aliases for common development paths:
+Workflow Optimization:
 
-- WordPress themes and plugins
-- Bedrock/Sage projects
-- Sandbox environments
-- Code editor workspaces
+- Quick access to development environments
+- Streamlined Git workflows with aliases
+- Consistent editor configurations across projects
+- Automated setup for new development machines
 
 ## Maintenance
 
 - Keep configurations minimal and well-documented
-- Prioritize human-readable code over brevity
+- Test stow deployments before committing changes
 - Regular cleanup of unused aliases and configurations
-- Test changes before committing
+- Version control all configuration changes
+
+## Migration Goals
+
+- Move remaining root configs into stow packages
+- Complete migration of remaining .config/ items
+- Implement bootstrap script for fresh installations
 
 ## Notes
 
-- Transitioning from oh-my-zsh to minimal setup
-- Building up plugins manually for better understanding
-- Focus on tools that enhance rather than complicate workflow
-- Optimized for ADHD-friendly organization (clear structure, minimal cognitive load)
+- *Transitioning to Stow-based management for better organization*
+- *Prioritizing human-readable configurations over brevity*
+- *Focus on tools that enhance rather than complicate workflow*
+- *Optimized for ADHD-friendly organization (clear structure, minimal cognitive load)*
+- *All symlinks point back to version-controlled source files*
 
 ---
 
