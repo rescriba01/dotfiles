@@ -21,6 +21,7 @@ Thumbs.db
 *.swo
 *~
 .vscode/settings.json
+*.code-workspace
 
 # Environment specific
 .env
