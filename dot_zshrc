@@ -1,0 +1,164 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Path to your oh-my-zsh installation and theme settings
+export ZSH=$HOME/.oh-my-zsh
+export ZSH_THEME=""
+export DEFAULT_USER="$(whoami)"
+
+# PATH configurations
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:/Applications/Cursor.app/Contents/MacOS"
+export PATH=$PATH:/Users/rescribano/.composer/vendor/bin
+export PATH=$PATH:/opt/homebrew/bin
+VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:${PATH}"
+
+# Source nvm command for terminal
+source ~/.nvm/nvm.sh
+
+# Specify which plugins you want to use
+plugins=(
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  yarn
+)
+
+# Fix Errors
+ZSH_DISABLE_COMPFIX="true"
+
+# Load oh-my-zsh and its plugins
+source $ZSH/oh-my-zsh.sh
+
+#######################
+# ZSH Configuration Options
+#######################
+
+# Case sensitivity
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Auto-update behavior
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# zstyle ':omz:update' frequency 13   # how often to auto-update (in days)
+
+# Command completion and UI options
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Display settings
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Repository status check settings
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# History settings
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+#######################
+# Aliases and Functions
+#######################
+
+# cd into dotfiles or open in Neovim
+alias dotfiles="cd ~/.dotfiles"
+alias neodot="nvim ~/.dotfiles"
+
+# Open Neovim
+alias neozsh="nvim ~/.zshrc"
+
+# Open iterm with my portfolio project loaded in 3 tabs
+alias workinit="osascript ~/dotfiles/AppleScripts/work_init.scpt"
+
+# PHP Coding Standards WordPress
+alias phpcs-wp="~/.composer/vendor/bin/phpcs -ps --standard=WordPress"
+
+# Config file quick access
+alias zshrc="code ~/.zshrc"
+alias cursor_zshrc="cursor ~/.zshrc"
+
+# Open files in VS Code
+alias open_bs="code ~/Sites/bedrock-sage"
+alias open_flir="code ~/Sites/FLIR"
+alias open_webfun="code ~/Sites/web-fun"
+alias open_wp-container="code ~/Sites/wp-container"
+alias open_sandboxes="code ~/Sites/sandboxes/"
+alias open_one-impulse="code ~/DevKinsta/public/one-impulse/one-impulse.code-workspace"
+
+# Open files in Cursor
+alias cursor_bs="cursor ~/Sites/bedrock-sage"
+alias cursor_flir="cursor ~/Sites/FLIR"
+alias cursor_webfun="cursor ~/Sites/web-fun"
+alias cursor_wp-container="cursor ~/Sites/wp-container"
+alias cursor_sandboxes="cursor ~/Sites/sandboxes/"
+alias cursor_one-impulse="cursor ~/DevKinsta/public/one-impulse/one-impulse.code-workspace"
+alias cursor_portfolio="cursor ~/'Local Sites'/rafaelescribano/app/public/wp-content/themes/re/re.code-workspace"
+
+# WordPress Themes
+alias open_themes="code ~/Work/wp-themes.code-workspace"
+alias open_greekfries="code ~/Work/wp-themes/greek-fries/greek-fries.code-workspace"
+alias cursor_themes="cursor ~/Work/wp-themes.code-workspace"
+alias cursor_greekfries="cursor ~/Work/wp-themes/greek-fries/greek-fries.code-workspace"
+
+# WordPress Plugins
+alias open_wp-plugins="code ~/Work/wp-plugins/wp-plugins.code-workspace"
+alias open_1ibl="code ~/Work/wp-plugins/one-impulse-block-library/one-impulse-block-library.code-workspace"
+alias cursor_wp-plugins="cursor ~/Work/wp-plugins/wp-plugins.code-workspace"
+alias cursor_1ibl="cursor ~/Work/wp-plugins/one-impulse-block-library/one-impulse-block-library.code-workspace"
+
+# Directory Navigation
+alias cd_bs="cd ~/Sites/bedrock-sage"
+alias cd_flir="cd ~/Sites/FLIR"
+alias cd_webfun="cd ~/Sites/web-fun"
+alias cd_wp-container="cd ~/Sites/wp-container"
+alias cd_sandboxes="cd ~/Sandboxes/"
+alias cd_one-impulse="cd ~/DevKinsta/public/one-impulse"
+alias cd_themes="cd ~/Work/wp-themes"
+alias cd_greekfries="cd ~/Work/wp-themes/greek-fries"
+
+# Working in themes (symlinking)
+alias setup-theme-link='mkdir -p ~/DevKinsta/public/one-impulse/wp-content/themes && rm -rf ~/DevKinsta/public/one-impulse/wp-content/themes/one-impulse-block-theme && ln -s ~/Work/wp-themes/greek-fries/one-impulse-block-theme ~/DevKinsta/public/one-impulse/wp-content/themes/one-impulse-block-theme && echo "Symbolic link created for one-impulse-block-theme"'
+
+# General Command Aliases
+alias ls='ls -lAFh'
+alias lsd='lsd -lAFh'
+
+#######################
+# Theme Configuration
+#######################
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Starship Theme
+eval "$(starship init zsh)"
