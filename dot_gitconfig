@@ -1,0 +1,22 @@
+[user]
+	name = Rafael Escribano
+	email = r.escribano1@gmail.com
+[color]
+	ui = auto
+[core]
+	autocrlf = input
+	excludesfile = /Users/rescribano/Sites/.gitignore_global
+[gc]
+	autoDetach = false
+[commit]
+	template = ~/.gitmessage
+[init]
+	defaultBranch = main
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[credential]
+	helper = osxkeychain
