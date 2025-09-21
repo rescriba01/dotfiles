@@ -1,0 +1,158 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# Install Homebrew if not present
+if ! command -v brew &> /dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Install packages using brew bundle
+brew bundle --file=/dev/stdin <<EOF
+# Taps
+tap "dart-lang/dart"
+tap "heroku/brew"
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "roots/tap"
+tap "sass/sass"
+
+# CLI Tools and Development
+brew "tree"
+brew "ansible"
+brew "apr-util"
+brew "aspell"
+brew "bash-completion"
+brew "bat"
+brew "brew-php-switcher"
+brew "chezmoi"
+brew "krb5"
+brew "freetds"
+brew "openldap"
+brew "php"
+brew "composer"
+brew "dark-mode"
+brew "dnsmasq"
+brew "docker-machine"
+brew "fzf"
+brew "gh"
+brew "git"
+brew "glib"
+brew "htop"
+brew "node"
+brew "http-server"
+brew "icu4c@76"
+brew "jq"
+brew "lazygit"
+brew "libfido2"
+brew "lsd"
+brew "lua"
+brew "luarocks"
+brew "mas"
+brew "mkcert"
+brew "mysql"
+brew "ncdu"
+brew "neovim"
+brew "nghttp2"
+brew "nginx"
+brew "nss"
+brew "nvm"
+brew "php@7.4"
+brew "pyenv"
+brew "starship"
+brew "telnet"
+brew "uv"
+brew "wp-cli", link: false
+brew "z"
+brew "heroku/brew/heroku"
+brew "roots/tap/trellis-cli"
+brew "sass/sass/migrator"
+brew "sass/sass/sass"
+
+# Applications
+cask "charles"
+cask "cheatsheet"
+cask "cyberduck"
+cask "discord"
+cask "docker-desktop"
+cask "dropbox"
+cask "firefox@developer-edition"
+cask "font-consolas-for-powerline"
+cask "local"
+cask "microsoft-auto-update"
+cask "microsoft-edge"
+cask "microsoft-teams"
+cask "mysql-shell"
+cask "mysqlworkbench"
+cask "notion"
+cask "obsidian"
+cask "pocket-casts"
+cask "slack"
+cask "tableplus"
+cask "vagrant"
+cask "virtualbox"
+cask "visual-studio-code"
+
+# Mac App Store apps
+mas "HP Smart", id: 1474276998
+mas "keymapp", id: 6472865291
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "OneDrive", id: 823766827
+mas "Pages", id: 409201541
+mas "Playlisty for Apple Music", id: 1459275972
+mas "Slack", id: 803453959
+mas "Xcode", id: 497799835
+
+# VS Code extensions
+vscode "bmewburn.vscode-intelephense-client"
+vscode "cacher.cacher-vscode"
+vscode "christian-kohler.path-intellisense"
+vscode "dbaeumer.vscode-eslint"
+vscode "deerawan.vscode-dash"
+vscode "donjayamanne.githistory"
+vscode "dsznajder.es7-react-js-snippets"
+vscode "dustinsanders.an-old-hope-theme-vscode"
+vscode "eamodio.gitlens"
+vscode "ecmel.vscode-html-css"
+vscode "equinusocio.vsc-material-theme"
+vscode "equinusocio.vsc-material-theme-icons"
+vscode "esbenp.prettier-vscode"
+vscode "formulahendry.auto-close-tag"
+vscode "formulahendry.auto-rename-tag"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "gruntfuggly.todo-tree"
+vscode "ibm.output-colorizer"
+vscode "johnpapa.vscode-peacock"
+vscode "jzmstrjp.color-the-tag-name"
+vscode "k--kato.intellij-idea-keybindings"
+vscode "mechatroner.rainbow-csv"
+vscode "mgmcdermott.vscode-language-babel"
+vscode "moshfeu.compare-folders"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "neilbrayfield.php-docblocker"
+vscode "oderwat.indent-rainbow"
+vscode "oouo-diogo-perdigao.docthis"
+vscode "pkief.material-icon-theme"
+vscode "pranaygp.vscode-css-peek"
+vscode "redhat.vscode-yaml"
+vscode "ritwickdey.liveserver"
+vscode "rubbersheep.gi"
+vscode "sdras.night-owl"
+vscode "vincaslt.highlight-matching-tag"
+vscode "wallabyjs.quokka-vscode"
+vscode "wayou.vscode-todo-highlight"
+vscode "wordpresstoolbox.wordpress-toolbox"
+vscode "xdebug.php-debug"
+vscode "xdebug.php-pack"
+vscode "zhuangtongfa.material-theme"
+vscode "zignd.html-css-class-completion"
+EOF
+{{ end -}}
