@@ -19,6 +19,9 @@ export PATH=$PATH:/opt/homebrew/bin
 VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:${PATH}"
 
+# Default Editor
+export EDITOR=nvim
+
 # Source nvm command for terminal
 source ~/.nvm/nvm.sh
 
