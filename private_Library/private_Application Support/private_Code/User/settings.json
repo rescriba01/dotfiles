@@ -1,0 +1,195 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.linkedEditing": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "phpcs.executablePath": "/Users/rescribano/.composer/vendor/bin/phpcs",
+  "editor.fontFamily": "'JetBrains Mono', Fira Code, Menlo, monospace",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": true,
+  "editor.wordWrap": "on",
+  "editor.formatOnSaveMode": "file",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "files.autoSave": "afterDelay",
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme": "An Old Hope",
+  "editor.formatOnSave": true,
+  "prettier.jsxSingleQuote": true,
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx",
+    "xml": {
+      "attr_quotes": "single"
+    }
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "prettier.singleQuote": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "terminal.external.osxExec": "iTerm.app",
+  "workbench.colorCustomizations": {
+    "[Material Theme Ocean]": {}
+  },
+  "bracket-pair-colorizer-2.colors": ["Gold", "Orchid", "LightSkyBlue"],
+  "bracket-pair-colorizer-2.excludedLanguages": [],
+  "yaml.schemas": {
+    "file:///Users/rescribano/.vscode/extensions/atlassian.atlascode-3.0.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  },
+  "atlascode.jira.enabled": false,
+  "atlascode.jira.jqlList": [
+    {
+      "id": "43337c6c-5be4-4787-b530-b6afbc6eea97",
+      "enabled": true,
+      "name": "My saltwaterco Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "1ad2ce9a-52f7-4bde-bcec-51597441ef73",
+      "monitor": true
+    }
+  ],
+  "redhat.telemetry.enabled": true,
+  "html-css-class-completion.enableEmmetSupport": true,
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "sync.gist": "ca1d4873e74dc9c07595537162b1628c",
+  // PHPCS
+  "phpcs.composerJsonPath": "/Users/rescribano/composer.json",
+  "phpcs.enable": true,
+  "phpcs.standard": "WordPress",
+  "phpcs.showWarnings": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "liveSassCompile.settings.excludeList": [
+    "**/node_modules/**",
+    ".vscode/**",
+    "**/wp-content/plugins/**"
+  ],
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "compressed",
+      "extensionName": ".css",
+      "savePath": "~/../css/"
+    }
+  ],
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "vscode-edge-devtools.headless": true,
+  "vscode-edge-devtools.mirrorEdits": true,
+  "files.associations": {
+    "*.html": "html-hubl",
+    "*.css": "css"
+  },
+  "material-icon-theme.activeIconPack": "react",
+  "emmet.triggerExpansionOnTab": true,
+  "html.format.indentHandlebars": true,
+  "html.format.indentInnerHtml": true,
+  "editor.inlineSuggest.enabled": true,
+  "atlascode.bitbucket.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.startupEditor": "none",
+  "css.enabledLanguages": [
+    []
+  ],
+  "workbench.statusBar.visible": false,
+  "terminal.integrated.fontSize": 15,
+  "github.copilot.editor.enableAutoCompletions": false,
+  "github.copilot.enable": {
+    "markdown": "true"
+  },
+  "intelephense.files.maxSize": 3000000,
+    "intelephense.stubs": [
+        "apache",
+        "bcmath",
+        "bz2",
+        "calendar",
+        "com_dotnet",
+        "Core",
+        "ctype",
+        "curl",
+        "date",
+        "dba",
+        "dom",
+        "enchant",
+        "exif",
+        "FFI",
+        "fileinfo",
+        "filter",
+        "fpm",
+        "ftp",
+        "gd",
+        "gettext",
+        "gmp",
+        "hash",
+        "iconv",
+        "imap",
+        "intl",
+        "json",
+        "ldap",
+        "libxml",
+        "mbstring",
+        "meta",
+        "mysqli",
+        "oci8",
+        "odbc",
+        "openssl",
+        "pcntl",
+        "pcre",
+        "PDO",
+        "pdo_ibm",
+        "pdo_mysql",
+        "pdo_pgsql",
+        "pdo_sqlite",
+        "pgsql",
+        "Phar",
+        "posix",
+        "pspell",
+        "readline",
+        "Reflection",
+        "session",
+        "shmop",
+        "SimpleXML",
+        "snmp",
+        "soap",
+        "sockets",
+        "sodium",
+        "SPL",
+        "sqlite3",
+        "standard",
+        "superglobals",
+        "sysvmsg",
+        "sysvsem",
+        "sysvshm",
+        "tidy",
+        "tokenizer",
+        "xml",
+        "xmlreader",
+        "xmlrpc",
+        "xmlwriter",
+        "xsl",
+        "Zend OPcache",
+        "zip",
+        "zlib",
+        "wordpress"
+    ],
+    "intelephense.files.associations": [
+      
+      "*.php",
+      "*.phtml"
+    ]
+}
