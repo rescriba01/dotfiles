@@ -1,0 +1,89 @@
+# Starship Configuration File
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Global Configurations
+# ---------------------
+
+# Inserts a blank line between shell prompts for readability
+add_newline = true
+
+# Custom format to provide contextual information
+# format = '''
+# [┌─](bold green)
+# [│ $username@$hostname](fg:blue) [$aws](fg:yellow) [$git_branch$git_commit](fg:magenta)
+# [└─$directory](bold green) '''
+
+# Reduce scan timeout to speed up the prompt
+scan_timeout = 10
+
+# Increase value of command_timeout to allow longer-running commands to keep executing
+command_timeout = 2000
+
+# Module Configurations
+# ---------------------
+
+# Username Module
+[username]
+style_user = "bold white"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+
+# Hostname Module
+[hostname]
+ssh_only = false
+format = 'on [$hostname](bold green) '
+trim_at = "."
+disabled = true
+
+# Directory Module
+[directory]
+read_only = ' 🔒'
+read_only_style = 'red'
+truncation_length = 4
+
+# Character Module
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+# Package Module
+[package]
+disabled = false
+
+# AWS Module
+[aws]
+format = 'at [$symbol($profile )(\($region\) )(\[$duration\] )]($style) '
+style = "bold yellow"
+
+# Docker
+[docker_context]
+symbol = '🐳 '
+format = "via [$symbol$context]($style)"
+style = "bold blue"
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_folders = []
+disabled = false
+
+# NodeJS Module
+[nodejs]
+format = 'via [🤖 $version](bold green) '
+
+# Memory Usage Module
+[memory_usage]
+format = "$symbol [${ram} | ${swap}]($style)"
+disabled = false
+
+[git_branch]
+symbol = '🌱 '
+truncation_length = 5
+truncation_symbol = ''
+ignore_branches = ['master', 'main']
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[🍒 PICKING](bold red)'
+
