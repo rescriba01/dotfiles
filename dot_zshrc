@@ -103,10 +103,6 @@ alias lazy="nvim"
 # Open zshrc in Lazyvim
 alias lazyzsh="nvim ~/.zshrc"
 
-# Open iterm with my portfolio project loaded in 3 tabs
-# TODO: re-enable once work_init.scpt is migrated into chezmoi (currently in the legacy ~/dotfiles dir)
-# alias workinit="osascript ~/dotfiles/AppleScripts/work_init.scpt"
-
 # PHP Coding Standards WordPress
 alias phpcs-wp="~/.composer/vendor/bin/phpcs -ps --standard=WordPress"
 
