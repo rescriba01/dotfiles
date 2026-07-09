@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
 # Path to your oh-my-zsh installation and theme settings
 export ZSH=$HOME/.oh-my-zsh
@@ -97,35 +97,66 @@ source $ZSH/oh-my-zsh.sh
 alias dotfiles="cd ~/.dotfiles"
 alias neodot="nvim ~/.dotfiles"
 
-# Open Neovim
-alias neozsh="nvim ~/.zshrc"
+# Open lazyvim
+alias lazy="nvim"
+
+# Open zshrc in Lazyvim
+alias lazyzsh="nvim ~/.zshrc"
 
 # Open iterm with my portfolio project loaded in 3 tabs
-alias workinit="osascript ~/dotfiles/AppleScripts/work_init.scpt"
+# TODO: re-enable once work_init.scpt is migrated into chezmoi (currently in the legacy ~/dotfiles dir)
+# alias workinit="osascript ~/dotfiles/AppleScripts/work_init.scpt"
 
 # PHP Coding Standards WordPress
 alias phpcs-wp="~/.composer/vendor/bin/phpcs -ps --standard=WordPress"
 
+# Directory Navigation (keep these for when you DON'T want nvim to open)
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# List improvements
+alias ls='lsd -lAFh'
+alias la='lsd -A'
+alias ll='lsd -l'
+alias lt='lsd --tree'
+alias llt='lsd --tree --group-directories-first --depth 3 --date relative --git --long'
+
+# Git shortcuts (for quick terminal operations)
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph --decorate'
+alias gd='git diff'
+
+# Chezmoi shortcuts
+alias cm='chezmoi'
+alias cma='chezmoi add'
+alias cme='chezmoi edit'
+alias cmcd='chezmoi cd'
+alias cmap='chezmoi apply'
+
 # Config file quick access
-alias zshrc="code ~/.zshrc"
-alias cursor_zshrc="cursor ~/.zshrc"
+# alias zshrc="code ~/.zshrc"
+# alias cursor_zshrc="cursor ~/.zshrc"
 
 # Open files in VS Code
-alias open_bs="code ~/Sites/bedrock-sage"
-alias open_flir="code ~/Sites/FLIR"
-alias open_webfun="code ~/Sites/web-fun"
-alias open_wp-container="code ~/Sites/wp-container"
-alias open_sandboxes="code ~/Sites/sandboxes/"
-alias open_one-impulse="code ~/DevKinsta/public/one-impulse/one-impulse.code-workspace"
+# alias open_bs="code ~/Sites/bedrock-sage"
+# alias open_flir="code ~/Sites/FLIR"
+# alias open_webfun="code ~/Sites/web-fun"
+# alias open_wp-container="code ~/Sites/wp-container"
+# alias open_sandboxes="code ~/Sites/sandboxes/"
+# alias open_one-impulse="code ~/DevKinsta/public/one-impulse/one-impulse.code-workspace"
 
 # Open files in Cursor
-alias cursor_bs="cursor ~/Sites/bedrock-sage"
-alias cursor_flir="cursor ~/Sites/FLIR"
-alias cursor_webfun="cursor ~/Sites/web-fun"
-alias cursor_wp-container="cursor ~/Sites/wp-container"
-alias cursor_sandboxes="cursor ~/Sites/sandboxes/"
-alias cursor_one-impulse="cursor ~/DevKinsta/public/one-impulse/one-impulse.code-workspace"
-alias cursor_portfolio="cursor ~/'Local Sites'/rafaelescribano/app/public/wp-content/themes/re/re.code-workspace"
+# alias cursor_bs="cursor ~/Sites/bedrock-sage"
+# alias cursor_flir="cursor ~/Sites/FLIR"
+# alias cursor_webfun="cursor ~/Sites/web-fun"
+# alias cursor_wp-container="cursor ~/Sites/wp-container"
+# alias cursor_sandboxes="cursor ~/Sites/sandboxes/"
+# alias cursor_one-impulse="cursor ~/DevKinsta/public/one-impulse/one-impulse.code-workspace"
+# alias cursor_portfolio="cursor ~/'Local Sites'/rafaelescribano/app/public/wp-content/themes/re/re.code-workspace"
 
 # WordPress Themes
 alias open_themes="code ~/Work/wp-themes.code-workspace"
@@ -152,16 +183,12 @@ alias cd_greekfries="cd ~/Work/wp-themes/greek-fries"
 # Working in themes (symlinking)
 alias setup-theme-link='mkdir -p ~/DevKinsta/public/one-impulse/wp-content/themes && rm -rf ~/DevKinsta/public/one-impulse/wp-content/themes/one-impulse-block-theme && ln -s ~/Work/wp-themes/greek-fries/one-impulse-block-theme ~/DevKinsta/public/one-impulse/wp-content/themes/one-impulse-block-theme && echo "Symbolic link created for one-impulse-block-theme"'
 
-# General Command Aliases
-alias ls='ls -lAFh'
-alias lsd='lsd -lAFh'
-
 #######################
 # Theme Configuration
 #######################
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Starship Theme
 eval "$(starship init zsh)"
