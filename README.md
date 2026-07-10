@@ -32,8 +32,14 @@ bootstrap above:
   automatically for scheduled exports) — this assumes iCloud Keychain
   sync carries it to the new machine; if it doesn't, reset the passphrase
   in Raycast and save the new one to 1Password before wiping the old Mac.
-- **SSH**: `~/.ssh/config` is tracked, but private keys (`~/.ssh/id_rsa`)
-  are not and never will be. Restore them from 1Password/backup, or set
-  up the 1Password SSH agent instead of file-based keys.
+- **SSH**: `~/.ssh/config` points `IdentityAgent` at 1Password's SSH agent
+  socket. On a new machine: install 1Password, sign in, enable Settings →
+  Developer → "Use the SSH agent" — the `rescriba01-github` key (stored in
+  the Private vault) syncs automatically and GitHub already trusts it, no
+  key file to restore. `id_rsa` is kept as a config fallback for now but
+  isn't required for anything currently in use; safe to prune later along
+  with its GitHub entry ("Personal Mac").
 - **gh CLI**: not tracked (its token lives in Keychain, not a dotfile).
-  Run `gh auth login` on the new machine.
+  Run `gh auth login` on the new machine. If `gh ssh-key add` is ever
+  needed again, the token also needs the `admin:public_key` scope:
+  `gh auth refresh -h github.com -s admin:public_key`.
