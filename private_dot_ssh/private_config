@@ -1,19 +1,5 @@
 Host *
   AddKeysToAgent yes
   UseKeychain yes
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   IdentityFile ~/.ssh/id_rsa
-
-Host staging-oneimpulsedev-oneimpulse.kinsta.cloud
-    PreferredAuthentications privatekey,password
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes
-
-Host oneimpulse-dev.com
-    PreferredAuthentications publickey,password
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes
-
-Host saltwaterstage
-HostName saltwaterstage.com
-User swstage_admin
-Port 22
