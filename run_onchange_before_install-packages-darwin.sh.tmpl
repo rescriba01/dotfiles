@@ -10,12 +10,8 @@ fi
 # Install packages using brew bundle
 brew bundle --file=/dev/stdin <<EOF
 # Taps
-tap "dart-lang/dart"
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/services"
-tap "roots/tap"
-tap "sass/sass"
 
 # CLI Tools and Development
 brew "tree"
@@ -61,17 +57,15 @@ brew "php@7.4"
 brew "pyenv"
 brew "starship"
 brew "telnet"
+brew "tre-command"
 brew "uv"
 brew "wp-cli", link: false
 brew "z"
-brew "heroku/brew/heroku"
-brew "roots/tap/trellis-cli"
-brew "sass/sass/migrator"
-brew "sass/sass/sass"
 
 # Applications
 cask "charles"
 cask "cheatsheet"
+cask "claude-code"
 cask "cyberduck"
 cask "discord"
 cask "docker-desktop"
@@ -130,6 +124,7 @@ vscode "k--kato.intellij-idea-keybindings"
 vscode "mechatroner.rainbow-csv"
 vscode "mgmcdermott.vscode-language-babel"
 vscode "moshfeu.compare-folders"
+vscode "ms-azuretools.vscode-containers"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
