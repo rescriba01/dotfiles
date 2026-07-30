@@ -89,3 +89,12 @@ own install — that's normal. This step takes a while; it's installing
   username exists in git history (commit `78990a8`, since removed from
   the current file) — accepted as low-stakes rather than rewriting
   history.
+- `php@7.4`, `docker-machine`, `vagrant`, and `virtualbox` were dropped
+  from the Brewfile (2026-07-10) ahead of a planned move to an M1 Pro
+  MacBook: `php@7.4` has been a disabled formula since 2022-11-28 and
+  would fail `brew bundle` outright on a fresh machine; the other three
+  are x86-virtualization-era tools with weak Apple Silicon support and
+  no remaining use (the Vagrant-based projects they served are dead).
+  `vagrant`/`virtualbox` still need a manual `brew uninstall --cask`
+  on machines where they're currently installed — their uninstallers
+  require an interactive sudo prompt.
