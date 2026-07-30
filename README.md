@@ -95,6 +95,3 @@ own install — that's normal. This step takes a while; it's installing
   would fail `brew bundle` outright on a fresh machine; the other three
   are x86-virtualization-era tools with weak Apple Silicon support and
   no remaining use (the Vagrant-based projects they served are dead).
-  `vagrant`/`virtualbox` still need a manual `brew uninstall --cask`
-  on machines where they're currently installed — their uninstallers
-  require an interactive sudo prompt.
