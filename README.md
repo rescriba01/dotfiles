@@ -2,6 +2,29 @@
 
 My Chezmoi managed dotfiles.
 
+## Keeping machines in sync
+
+`chezmoi init` asks once whether a machine is **personal** or **work**. That
+picks which package sections install (`.chezmoidata/packages.yaml`) and whether
+the machine may push.
+
+`~/bin/chezmoi-sync` runs daily at 10:00 via launchd
+(`~/Library/Logs/chezmoi-sync.log`):
+
+- Pulls `main` and applies incoming changes.
+- Local edits are never overwritten. On personal machines they're committed to
+  `sync/<host>` and pushed, with a notification. Merge the branch on GitHub
+  (or cherry-pick), then delete it. Work machines only notify.
+- Packages installed but missing from `packages.yaml` are listed in
+  `sync-reports/<host>.md` on the review branch. Copy them into the right
+  section of `packages.yaml` by hand.
+- Package-list changes aren't installed automatically; it notifies you to run
+  `chezmoi apply`.
+
+`chezmoi-sync --dry-run` shows what it would do. A gitleaks pre-commit hook
+blocks commits containing secrets. The repo fetches over HTTPS and pushes over
+SSH (1Password agent), so pushes need 1Password unlocked.
+
 ## New machine migration checklist
 
 ### 0. On the OLD machine, right before migration day
@@ -37,7 +60,8 @@ My Chezmoi managed dotfiles.
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply rescriba01
 ```
 
-This applies all tracked dotfiles, runs `run_once_after_macos-defaults.sh`
+Answer the machine-type prompt (`personal` or `work`). This applies all
+tracked dotfiles, runs `run_once_after_macos-defaults.sh`
 (Dock/keyboard/Finder/screenshot preferences), and runs the Homebrew
 installer script (formulae, casks, Mac App Store apps, VS Code
 extensions). It'll prompt for the admin password once, for Homebrew's
