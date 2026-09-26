@@ -1,2 +1,5 @@
 # Repo documentation, not meant to be deployed to $HOME
 README.md
+
+# Repo-only helper scripts, not deployed to $HOME
+scripts
