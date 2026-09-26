@@ -95,10 +95,10 @@ source $ZSH/oh-my-zsh.sh
 
 # cd into dotfiles or open in Neovim
 alias dotfiles="cd ~/.dotfiles"
-alias neodot="nvim ~/.dotfiles"
+alias lazydot="nvim ~/.dotfiles"
 
 # Open lazyvim
-alias lazy="nvim"
+alias lz="nvim"
 
 # Open zshrc in Lazyvim
 alias lazyzsh="nvim ~/.zshrc"
@@ -159,6 +159,9 @@ alias open_themes="code ~/Work/wp-themes.code-workspace"
 alias open_greekfries="code ~/Work/wp-themes/greek-fries/greek-fries.code-workspace"
 alias cursor_themes="cursor ~/Work/wp-themes.code-workspace"
 alias cursor_greekfries="cursor ~/Work/wp-themes/greek-fries/greek-fries.code-workspace"
+
+# Lazyvim
+alias lazy_re="~/'Local Sites'/rafaelescribano/app/public/wp-content/themes/re/"
 
 # WordPress Plugins
 alias open_wp-plugins="code ~/Work/wp-plugins/wp-plugins.code-workspace"
