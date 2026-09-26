@@ -3,3 +3,6 @@ README.md
 
 # Repo-only helper scripts, not deployed to $HOME
 scripts
+
+# Per-machine drift reports written by chezmoi-sync on review branches
+sync-reports

@@ -1,0 +1,154 @@
+#!/bin/bash
+# chezmoi-sync: daily two-way check between this machine and the dotfiles repo.
+#
+#   1. Pulls origin/main into the chezmoi source (fast-forward only).
+#   2. Finds local drift: dotfiles edited on this machine since chezmoi last
+#      wrote them, plus installed packages missing from packages.yaml.
+#   3. Drift is never overwritten. When syncPush is true (personal machines) it
+#      is committed to the sync/<host> branch and pushed for review; otherwise
+#      it is only reported.
+#   4. Applies every incoming change that doesn't touch a drifted file.
+#      Scripts (package installs) are left for a manual `chezmoi apply`.
+#
+# Runs from launchd daily. Run by hand with --dry-run to see what it would do.
+
+# No -u: macOS bash 3.2 treats empty arrays as unbound
+set -eo pipefail
+export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/bin:$PATH"
+
+dry_run=false
+[ "${1:-}" = "--dry-run" ] && dry_run=true
+
+host=$(scutil --get LocalHostName 2>/dev/null || hostname -s)
+src=$(chezmoi source-path)
+branch="sync/$host"
+report="sync-reports/$host.md"
+push=$(chezmoi execute-template '{{ .syncPush }}')
+
+g() { git -C "$src" "$@"; }
+log() { echo "$(date '+%F %T') $*"; }
+notify() {
+  log "$1: $2"
+  $dry_run && return
+  if command -v osascript >/dev/null; then
+    osascript -e "display notification \"$2\" with title \"$1\"" || true
+  elif command -v notify-send >/dev/null; then
+    notify-send "$1" "$2" || true
+  fi
+}
+
+# Don't touch the source if it's mid-edit or on another branch
+if [ -n "$(g status --porcelain)" ] || [ "$(g branch --show-current)" != "main" ]; then
+  notify "chezmoi-sync skipped" "Source repo has uncommitted work or isn't on main"
+  exit 0
+fi
+
+# 1. Pull
+g fetch -q --prune origin
+if ! g merge -q --ff-only origin/main; then
+  notify "chezmoi-sync stopped" "Local main has diverged from origin/main"
+  exit 1
+fi
+
+# 2a. Dotfile drift. Status columns: 1 = changed on disk since chezmoi last
+# wrote it, 2 = differs from the repo. Both set means a local edit that
+# applying would overwrite.
+drifted=() drifted_templates=() safe=()
+while IFS= read -r line; do
+  [ -n "$line" ] || continue
+  local_change=${line:0:1} repo_diff=${line:1:1} path="$HOME/${line:3}"
+  if [ "$local_change" != " " ] && [ "$repo_diff" != " " ]; then
+    if [[ "$(chezmoi source-path "$path")" == *.tmpl ]]; then
+      drifted_templates+=("$path")
+    else
+      drifted+=("$path")
+    fi
+  else
+    safe+=("$path")
+  fi
+done < <(chezmoi status --exclude=scripts)
+
+# 2b. Package drift (macOS): installed but not listed in packages.yaml
+new_packages=""
+if [ "$(uname)" = "Darwin" ] && command -v brew >/dev/null; then
+  data=$(chezmoi data --format json)
+  listed() { # listed <section> <key>: names from common + this machine type
+    jq -r --arg s "$1" --arg k "$2" \
+      '.machineType as $t | .packages[$s].common[$k] + .packages[$s][$t][$k] | .[] | if type == "object" then .id else . end | tostring | ascii_downcase' \
+      <<<"$data" | sort -u
+  }
+  untracked() { # untracked <label> <listed> <installed>
+    comm -13 <(echo "$2") <(echo "$3" | tr 'A-Z' 'a-z' | sort -u) | sed "/^$/d; s/^/- $1 /"
+  }
+  # Renamed casks leave a symlink under their old name; count directories only
+  installed_casks=$(find "$(brew --caskroom)" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
+  new_packages+=$(untracked brew "$( (listed darwin brews; listed darwin brews_unlinked) | sort -u)" "$(brew leaves)")$'\n'
+  new_packages+=$(untracked cask "$(listed darwin casks)" "$installed_casks")$'\n'
+  if command -v mas >/dev/null; then
+    new_packages+=$(untracked mas "$(listed darwin mas)" "$(mas list | awk '{print $1}')")$'\n'
+  fi
+  if command -v code >/dev/null; then
+    new_packages+=$(untracked vscode "$(jq -r '.machineType as $t | .packages.vscode.common + .packages.vscode[$t] | .[] | ascii_downcase' <<<"$data" | sort -u)" "$(code --list-extensions)")
+  fi
+  new_packages=$(sed '/^$/d' <<<"$new_packages")
+fi
+
+# 3. Save drift for review
+drift_count=$(( ${#drifted[@]} + ${#drifted_templates[@]} + $(grep -c . <<<"$new_packages" || true) ))
+if [ "$drift_count" -gt 0 ]; then
+  summary="$drift_count local change(s) on $host"
+  if [ "$push" = "true" ] && ! $dry_run; then
+    g switch -q -C "$branch"
+    if [ ${#drifted[@]} -gt 0 ]; then chezmoi re-add "${drifted[@]}"; fi
+    mkdir -p "$src/sync-reports"
+    {
+      echo "# Sync report: $host"
+      echo
+      echo "Generated $(date '+%F %T'). Merge what you want into main, then delete this branch."
+      if [ -n "$new_packages" ]; then
+        echo; echo "## Installed but not in .chezmoidata/packages.yaml"; echo; echo "$new_packages"
+      fi
+      if [ ${#drifted_templates[@]} -gt 0 ]; then
+        echo; echo "## Edited template targets (port these edits into the .tmpl by hand)"; echo
+        printf -- '- %s\n' "${drifted_templates[@]/#$HOME/~}"
+      fi
+    } >"$src/$report"
+    g add -A
+    g commit -q -m "Sync from $host: $summary" || true
+    # Only push when the content differs from what's already up for review
+    # chezmoi init clones over HTTPS; push over SSH (1Password agent)
+    if [ -z "$(g config --get remote.origin.pushurl)" ]; then
+      g remote set-url --push origin "$(g remote get-url origin | sed -E 's#^https://github.com/#git@github.com:#')"
+    fi
+    pushed=true
+    if ! g diff --quiet "origin/$branch" HEAD -- 2>/dev/null; then
+      g push -q -f origin "$branch" || pushed=false
+    fi
+    g switch -q main
+    if $pushed; then
+      notify "Dotfiles: review needed" "$summary, pushed to $branch"
+    else
+      notify "Dotfiles: push failed" "$summary committed to $branch locally. Is 1Password unlocked?"
+    fi
+  else
+    notify "Dotfiles: local changes" "$summary (not pushed). Run chezmoi-sync --dry-run for details"
+  fi
+  if $dry_run; then
+    for f in "${drifted[@]}" "${drifted_templates[@]}"; do echo "drifted: ${f/#$HOME/~}"; done
+    if [ -n "$new_packages" ]; then echo "$new_packages"; fi
+  fi
+fi
+
+# 4. Apply incoming changes that don't collide with local drift
+if [ ${#safe[@]} -gt 0 ]; then
+  if $dry_run; then
+    for f in "${safe[@]}"; do echo "would apply: ${f/#$HOME/~}"; done
+  else
+    chezmoi apply --no-tty "${safe[@]}" </dev/null
+    log "applied ${#safe[@]} file(s)"
+  fi
+fi
+if [ -n "$(chezmoi status --include=scripts)" ]; then
+  notify "Dotfiles: packages changed" "Run 'chezmoi apply' to install updated packages"
+fi
+log "done"

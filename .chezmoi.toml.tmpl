@@ -1,0 +1,9 @@
+{{- /* Asked once per machine on `chezmoi init`; answers are kept in ~/.config/chezmoi/chezmoi.toml */ -}}
+{{- $machineType := promptChoiceOnce . "machineType" "Machine type" (list "personal" "work") -}}
+{{- $syncPush := ne $machineType "work" -}}
+
+[data]
+    machineType = {{ $machineType | quote }}
+    # Whether chezmoi-sync may push this machine's local changes to a review
+    # branch. Work machines only pull.
+    syncPush = {{ $syncPush }}

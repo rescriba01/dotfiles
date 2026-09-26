@@ -1,0 +1,160 @@
+# Package lists consumed by run_onchange_before_install-packages-darwin.sh.tmpl
+# and bin/executable_chezmoi-sync (package drift check).
+#
+# "common" installs on every Mac. "personal" and "work" install only when the
+# machine's type (set at `chezmoi init`) matches. Editing this file re-runs the
+# installer on the next `chezmoi apply`.
+packages:
+  darwin:
+    common:
+      taps:
+      - "homebrew/bundle"
+      - "homebrew/services"
+      brews:
+      - "tree"
+      - "ansible"
+      - "apr-util"
+      - "aspell"
+      - "bash-completion"
+      - "bat"
+      - "brew-php-switcher"
+      - "chezmoi"
+      - "krb5"
+      - "freetds"
+      - "openldap"
+      - "php"
+      - "composer"
+      - "dark-mode"
+      - "dnsmasq"
+      - "fzf"
+      - "gh"
+      - "gitleaks"
+      - "git"
+      - "glib"
+      - "htop"
+      - "node"
+      - "http-server"
+      - "icu4c@76"
+      - "jq"
+      - "lazygit"
+      - "libfido2"
+      - "lsd"
+      - "lua"
+      - "luarocks"
+      - "mas"
+      - "mkcert"
+      - "mysql"
+      - "ncdu"
+      - "neovim"
+      - "nghttp2"
+      - "nginx"
+      - "nss"
+      - "nvm"
+      - "pyenv"
+      - "starship"
+      - "telnet"
+      - "tre-command"
+      - "uv"
+      - "z"
+      # Installed without linking into PATH
+      brews_unlinked:
+        - "wp-cli"
+      casks:
+      - "charles"
+      - "cheatsheet"
+      - "claude-code"
+      - "cyberduck"
+      - "docker-desktop"
+      - "figma"
+      - "firefox@developer-edition"
+      - "font-consolas-for-powerline"
+      - "local"
+      - "microsoft-auto-update"
+      - "microsoft-edge"
+      - "microsoft-teams"
+      - "mysql-shell"
+      - "mysqlworkbench"
+      - "notion"
+      - "obsidian"
+      - "slack"
+      - "tableplus"
+      - "visual-studio-code"
+      mas:
+      - { name: "keymapp", id: 6472865291 }
+      - { name: "Keynote", id: 409183694 }
+      - { name: "Numbers", id: 409203825 }
+      - { name: "OneDrive", id: 823766827 }
+      - { name: "Pages", id: 409201541 }
+      - { name: "Slack", id: 803453959 }
+      - { name: "Xcode", id: 497799835 }
+    personal:
+      taps: []
+      brews: []
+      brews_unlinked: []
+      casks:
+      - "discord"
+      - "dropbox"
+      - "pocket-casts"
+      mas:
+      - { name: "HP Smart", id: 1474276998 }
+      - { name: "Playlisty for Apple Music", id: 1459275972 }
+    work:
+      taps: []
+      brews: []
+      brews_unlinked: []
+      casks: []
+      mas: []
+  vscode:
+    common:
+      - "bmewburn.vscode-intelephense-client"
+      - "cacher.cacher-vscode"
+      - "christian-kohler.path-intellisense"
+      - "dbaeumer.vscode-eslint"
+      - "deerawan.vscode-dash"
+      - "donjayamanne.githistory"
+      - "dsznajder.es7-react-js-snippets"
+      - "dustinsanders.an-old-hope-theme-vscode"
+      - "eamodio.gitlens"
+      - "ecmel.vscode-html-css"
+      - "equinusocio.vsc-material-theme"
+      - "equinusocio.vsc-material-theme-icons"
+      - "esbenp.prettier-vscode"
+      - "formulahendry.auto-close-tag"
+      - "formulahendry.auto-rename-tag"
+      - "github.copilot"
+      - "github.copilot-chat"
+      - "gruntfuggly.todo-tree"
+      - "ibm.output-colorizer"
+      - "johnpapa.vscode-peacock"
+      - "jzmstrjp.color-the-tag-name"
+      - "k--kato.intellij-idea-keybindings"
+      - "mechatroner.rainbow-csv"
+      - "mgmcdermott.vscode-language-babel"
+      - "moshfeu.compare-folders"
+      - "ms-azuretools.vscode-containers"
+      - "ms-azuretools.vscode-docker"
+      - "ms-python.debugpy"
+      - "ms-python.python"
+      - "ms-python.vscode-pylance"
+      - "ms-toolsai.jupyter"
+      - "ms-vscode-remote.remote-containers"
+      - "ms-vsliveshare.vsliveshare"
+      - "neilbrayfield.php-docblocker"
+      - "oderwat.indent-rainbow"
+      - "oouo-diogo-perdigao.docthis"
+      - "pkief.material-icon-theme"
+      - "pranaygp.vscode-css-peek"
+      - "redhat.vscode-yaml"
+      - "ritwickdey.liveserver"
+      - "rubbersheep.gi"
+      - "sdras.night-owl"
+      - "vincaslt.highlight-matching-tag"
+      - "wallabyjs.quokka-vscode"
+      - "wayou.vscode-todo-highlight"
+      - "wordpresstoolbox.wordpress-toolbox"
+      - "xdebug.php-debug"
+      - "xdebug.php-pack"
+      - "zhuangtongfa.material-theme"
+      - "zignd.html-css-class-completion"
+    personal: []
+    work: []
