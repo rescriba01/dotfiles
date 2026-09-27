@@ -11,8 +11,6 @@ export ZSH_THEME=""
 export DEFAULT_USER="$(whoami)"
 
 # PATH configurations
-# Drop duplicate PATH entries, keeping the first occurrence
-typeset -U path
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:/Applications/Cursor.app/Contents/MacOS"
@@ -193,3 +191,7 @@ alias setup-theme-link='mkdir -p ~/DevKinsta/public/one-impulse/wp-content/theme
 
 # Starship Theme
 eval "$(starship init zsh)"
+
+# Drop duplicate PATH entries, keeping the first occurrence. Must stay last:
+# `export PATH=...` (used above and by nvm/Volta) bypasses the uniqueness flag.
+typeset -U path
