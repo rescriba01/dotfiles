@@ -1,0 +1,20 @@
+ source ~/.profile
+
+# Set the Volta Home Variable according to [docs](https://docs.volta.sh/guide/getting-started)
+# VOLTA_HOME="$HOME/.volta"
+# Add $VOLTA_HOME/bin to the beginning of your PATH variable
+# PATH="$VOLTA_HOME/bin:${PATH}"
+
+# Adding Homebrew and Volta to the "top" of the PATH environment variable
+export "PATH=/usr/local/bin:/usr/local/sbin:${VOLTA_HOME}/bin:${PATH}"
+
+# [Configuring Shell Completions in zsh](https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh)
+#  Check link for any zsh compinit errors
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+
+# Added by Toolbox App
+export PATH="$PATH:/usr/local/bin"
+
+# Configuring Completions in zsh
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
