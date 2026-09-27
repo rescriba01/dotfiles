@@ -19,7 +19,8 @@ brew bundle --no-upgrade --file=/dev/stdin <<BREWFILE
 {{ end }}{{ end -}}
 {{ range $sets }}{{ range .brews }}brew {{ . | quote }}
 {{ end }}{{ range .brews_unlinked }}brew {{ . | quote }}, link: false
-{{ end }}{{ end -}}
+{{ end }}{{ if eq $.chezmoi.arch "arm64" }}{{ range .brews_arm64_only }}brew {{ . | quote }}
+{{ end }}{{ end }}{{ end -}}
 {{ range $sets }}{{ range .casks }}cask {{ . | quote }}
 {{ end }}{{ end -}}
 {{ range $sets }}{{ range .mas }}mas {{ .name | quote }}, id: {{ .id }}

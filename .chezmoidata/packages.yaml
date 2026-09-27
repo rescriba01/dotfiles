@@ -28,7 +28,6 @@ packages:
       - "dnsmasq"
       - "fzf"
       - "gh"
-      - "gitleaks"
       - "git"
       - "glib"
       - "htop"
@@ -59,6 +58,11 @@ packages:
       # Installed without linking into PATH
       brews_unlinked:
         - "wp-cli"
+      # Apple Silicon only: Homebrew no longer ships Intel bottles, and these
+      # would compile from source. On Intel, install the release binary into
+      # ~/bin by hand (see README).
+      brews_arm64_only:
+        - "betterleaks"
       casks:
       - "charles"
       - "cheatsheet"
@@ -90,6 +94,7 @@ packages:
       taps: []
       brews: []
       brews_unlinked: []
+      brews_arm64_only: []
       casks:
       - "discord"
       - "dropbox"
@@ -101,6 +106,7 @@ packages:
       taps: []
       brews: []
       brews_unlinked: []
+      brews_arm64_only: []
       casks: []
       mas: []
   vscode:

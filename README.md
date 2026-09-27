@@ -21,8 +21,14 @@ the machine may push.
 - Package-list changes aren't installed automatically; it notifies you to run
   `chezmoi apply`.
 
-`chezmoi-sync --dry-run` shows what it would do. A gitleaks pre-commit hook
-blocks commits containing secrets. The repo fetches over HTTPS and pushes over
+`chezmoi-sync --dry-run` shows what it would do. A
+[Betterleaks](https://betterleaks.com) pre-commit hook blocks commits
+containing secrets (and refuses to commit if Betterleaks is missing).
+Homebrew installs it on Apple Silicon. On Intel Macs, Homebrew would have to
+compile it, so install the release binary instead: download
+`betterleaks_<version>_darwin_x64.tar.gz` from
+[its releases](https://github.com/betterleaks/betterleaks/releases), check it
+against `checksums.txt`, and put `betterleaks` in `~/bin`. The repo fetches over HTTPS and pushes over
 SSH (1Password agent), so pushes need 1Password unlocked.
 
 ## New machine migration checklist
