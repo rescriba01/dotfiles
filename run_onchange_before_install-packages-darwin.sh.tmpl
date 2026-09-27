@@ -11,7 +11,10 @@ fi
 {{ $sets := list .packages.darwin.common (index .packages.darwin .machineType) -}}
 {{ $vscode := concat .packages.vscode.common (index .packages.vscode .machineType) -}}
 # Install packages using brew bundle ({{ .machineType }} machine)
-brew bundle --file=/dev/stdin <<BREWFILE
+# --no-upgrade: install what's missing, never upgrade what's there (run
+# `brew upgrade` deliberately). On Intel Macs Homebrew no longer ships bottles,
+# so an upgrade means compiling from source.
+brew bundle --no-upgrade --file=/dev/stdin <<BREWFILE
 {{ range $sets }}{{ range .taps }}tap {{ . | quote }}
 {{ end }}{{ end -}}
 {{ range $sets }}{{ range .brews }}brew {{ . | quote }}

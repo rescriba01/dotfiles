@@ -85,7 +85,6 @@ packages:
       - { name: "Numbers", id: 409203825 }
       - { name: "OneDrive", id: 823766827 }
       - { name: "Pages", id: 409201541 }
-      - { name: "Slack", id: 803453959 }
       - { name: "Xcode", id: 497799835 }
     personal:
       taps: []
@@ -121,8 +120,6 @@ packages:
       - "esbenp.prettier-vscode"
       - "formulahendry.auto-close-tag"
       - "formulahendry.auto-rename-tag"
-      - "github.copilot"
-      - "github.copilot-chat"
       - "gruntfuggly.todo-tree"
       - "ibm.output-colorizer"
       - "johnpapa.vscode-peacock"
