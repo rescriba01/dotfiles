@@ -1,19 +1,44 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 # Package lists live in .chezmoidata/packages.yaml; this re-runs when they change.
+# Personal machines install common + personal; work machines install only the
+# work section (non-admin, and every formula compiles from source there).
+# Homebrew found at render time (re-runs once it's installed):
+# {{ output "sh" "-c" "ls -d /opt/homebrew/bin/brew /usr/local/bin/brew $HOME/.homebrew/bin/brew 2>/dev/null; true" | sha256sum }}
 
-# Install Homebrew if not present
-if ! command -v brew &> /dev/null; then
+brew=""
+for p in /opt/homebrew /usr/local "$HOME/.homebrew"; do
+    if [ -x "$p/bin/brew" ]; then brew="$p/bin/brew"; break; fi
+done
+
+if [ -z "$brew" ]; then
+{{- if .isAdmin }}
     echo "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    for p in /opt/homebrew /usr/local; do
+        if [ -x "$p/bin/brew" ]; then brew="$p/bin/brew"; break; fi
+    done
+{{- else }}
+    echo "Homebrew not found and this account isn't an admin, so it can't be" >&2
+    echo "installed system-wide. See 'Work machines' in the dotfiles README for" >&2
+    echo "the no-admin install into ~/.homebrew. Skipping packages for now." >&2
+    exit 0
+{{- end }}
 fi
+eval "$("$brew" shellenv)"
 
-{{ $sets := list .packages.darwin.common (index .packages.darwin .machineType) -}}
-{{ $vscode := concat .packages.vscode.common (index .packages.vscode .machineType) -}}
-# Install packages using brew bundle ({{ .machineType }} machine)
+# Without admin rights, casks can't write to /Applications
+[ -w /Applications ] || export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
+
+{{ $sets := list (index .packages.darwin .machineType) -}}
+{{ $vscode := index .packages.vscode .machineType -}}
+{{ if ne .machineType "work" -}}
+{{   $sets = prepend $sets .packages.darwin.common -}}
+{{   $vscode = concat .packages.vscode.common $vscode -}}
+{{ end -}}
 # --no-upgrade: install what's missing, never upgrade what's there (run
-# `brew upgrade` deliberately). On Intel Macs Homebrew no longer ships bottles,
-# so an upgrade means compiling from source.
+# `brew upgrade` deliberately). On Intel Macs and non-default prefixes Homebrew
+# has no bottles, so an upgrade means compiling from source.
 brew bundle --no-upgrade --file=/dev/stdin <<BREWFILE
 {{ range $sets }}{{ range .taps }}tap {{ . | quote }}
 {{ end }}{{ end -}}
@@ -23,8 +48,8 @@ brew bundle --no-upgrade --file=/dev/stdin <<BREWFILE
 {{ end }}{{ end }}{{ end -}}
 {{ range $sets }}{{ range .casks }}cask {{ . | quote }}
 {{ end }}{{ end -}}
-{{ range $sets }}{{ range .mas }}mas {{ .name | quote }}, id: {{ .id }}
-{{ end }}{{ end -}}
+{{ if .isAdmin }}{{ range $sets }}{{ range .mas }}mas {{ .name | quote }}, id: {{ .id }}
+{{ end }}{{ end }}{{ end -}}
 {{ range $vscode }}vscode {{ . | quote }}
 {{ end -}}
 BREWFILE

@@ -14,7 +14,7 @@
 
 # No -u: macOS bash 3.2 treats empty arrays as unbound
 set -eo pipefail
-export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/bin:$PATH"
+export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/.homebrew/bin:$HOME/bin:$PATH"
 
 dry_run=false
 [ "${1:-}" = "--dry-run" ] && dry_run=true

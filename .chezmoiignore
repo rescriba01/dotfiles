@@ -6,3 +6,6 @@ scripts
 
 # Per-machine drift reports written by chezmoi-sync on review branches
 sync-reports
+
+# The daily sync job only on machines that opted in at `chezmoi init`
+{{ if not .dailySync }}Library/LaunchAgents/com.rescriba01.chezmoi-sync.plist{{ end }}

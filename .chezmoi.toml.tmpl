@@ -1,9 +1,19 @@
 {{- /* Asked once per machine on `chezmoi init`; answers are kept in ~/.config/chezmoi/chezmoi.toml */ -}}
 {{- $machineType := promptChoiceOnce . "machineType" "Machine type" (list "personal" "work") -}}
-{{- $syncPush := ne $machineType "work" -}}
+{{- $isWork := eq $machineType "work" -}}
+{{- $gitEmail := "r.escribano1@gmail.com" -}}
+{{- if $isWork -}}
+{{-   $gitEmail = promptStringOnce . "gitEmail" "Work git email (stays on this machine, not in the repo)" -}}
+{{- end -}}
+{{- $dailySync := promptBoolOnce . "dailySync" "Run chezmoi-sync daily at 10:00 (pull and apply the repo automatically)" (not $isWork) -}}
+{{- /* Admin rights decide whether Homebrew, /Applications and App Store installs are possible */ -}}
+{{- $isAdmin := has "admin" (output "id" "-Gn" | trim | splitList " ") -}}
 
 [data]
     machineType = {{ $machineType | quote }}
+    gitEmail = {{ $gitEmail | quote }}
+    dailySync = {{ $dailySync }}
+    isAdmin = {{ $isAdmin }}
     # Whether chezmoi-sync may push this machine's local changes to a review
     # branch. Work machines only pull.
-    syncPush = {{ $syncPush }}
+    syncPush = {{ not $isWork }}

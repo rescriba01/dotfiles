@@ -4439,7 +4439,7 @@
 			<key>Normal Font</key>
 			<string>FiraCodeNFM-Ret 16</string>
 			<key>Only The Default BG Color Uses Transparency</key>
-			<true/>
+			<false/>
 			<key>Open Password Manager Automatically</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -4588,7 +4588,7 @@
 			<key>Title Components</key>
 			<integer>3</integer>
 			<key>Transparency</key>
-			<real>0.40289382934570311</real>
+			<real>0.69727608816964282</real>
 			<key>Underline Color (Dark)</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -5188,6 +5188,8 @@
 	<key>TabViewType</key>
 	<integer>0</integer>
 	<key>UseCustomScriptsFolder</key>
+	<false/>
+	<key>UseLionStyleFullscreen</key>
 	<false/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>

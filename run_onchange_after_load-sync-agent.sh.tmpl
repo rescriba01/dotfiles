@@ -1,8 +1,14 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-# Reloads the daily chezmoi-sync launchd job whenever its plist changes.
+# Loads (or unloads) the daily chezmoi-sync launchd job. Re-runs when the plist
+# or the machine's dailySync answer changes.
 # plist hash: {{ include "private_Library/LaunchAgents/com.rescriba01.chezmoi-sync.plist.tmpl" | sha256sum }}
+# dailySync: {{ .dailySync }}
 plist="$HOME/Library/LaunchAgents/com.rescriba01.chezmoi-sync.plist"
 launchctl bootout "gui/$(id -u)" "$plist" 2>/dev/null || true
+{{ if .dailySync -}}
 launchctl bootstrap "gui/$(id -u)" "$plist"
+{{- else -}}
+rm -f "$plist"
+{{- end }}
 {{ end -}}

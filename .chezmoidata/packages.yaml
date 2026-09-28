@@ -1,9 +1,10 @@
 # Package lists consumed by run_onchange_before_install-packages-darwin.sh.tmpl
 # and bin/executable_chezmoi-sync (package drift check).
 #
-# "common" installs on every Mac. "personal" and "work" install only when the
-# machine's type (set at `chezmoi init`) matches. Editing this file re-runs the
-# installer on the next `chezmoi apply`.
+# Personal Macs install "common" + "personal". Work Macs install only "work":
+# they have no admin account and Homebrew lives in ~/.homebrew, where every
+# formula compiles from source, so keep that list short. Editing this file
+# re-runs the installer on the next `chezmoi apply`.
 packages:
   darwin:
     common:
@@ -66,7 +67,6 @@ packages:
       casks:
       - "charles"
       - "cheatsheet"
-      - "claude-code"
       - "cyberduck"
       - "docker-desktop"
       - "figma"
@@ -96,6 +96,7 @@ packages:
       brews_unlinked: []
       brews_arm64_only: []
       casks:
+      - "claude-code"
       - "discord"
       - "dropbox"
       - "pocket-casts"

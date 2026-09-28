@@ -4,11 +4,20 @@ My Chezmoi managed dotfiles.
 
 ## Keeping machines in sync
 
-`chezmoi init` asks once whether a machine is **personal** or **work**. That
-picks which package sections install (`.chezmoidata/packages.yaml`) and whether
-the machine may push.
+`chezmoi init` asks once per machine and keeps the answers in
+`~/.config/chezmoi/chezmoi.toml`, never in this repo:
 
-`~/bin/chezmoi-sync` runs daily at 10:00 via launchd
+- **Machine type**, `personal` or `work`. It picks the package sections
+  (`.chezmoidata/packages.yaml`), whether the machine may push, and whether
+  the SSH config uses 1Password's agent (personal only).
+- **Work git email**, on work machines only.
+- **Daily sync**, on or off. The default is on for personal machines and
+  off for work machines.
+
+It also detects whether the account is an admin. Non-admin machines never
+install Homebrew themselves and skip Mac App Store apps.
+
+When the daily sync is on, `~/bin/chezmoi-sync` runs at 10:00 via launchd
 (`~/Library/Logs/chezmoi-sync.log`):
 
 - Pulls `main` and applies incoming changes.
@@ -30,6 +39,35 @@ compile it, so install the release binary instead: download
 [its releases](https://github.com/betterleaks/betterleaks/releases), check it
 against `checksums.txt`, and put `betterleaks` in `~/bin`. The repo fetches over HTTPS and pushes over
 SSH (1Password agent), so pushes need 1Password unlocked.
+
+## Work machines (no admin rights)
+
+One Mac I use has no admin account, so the personal checklist below
+doesn't apply. Differences:
+
+- **Homebrew lives in `~/.homebrew`**, installed without admin by cloning
+  `github.com/Homebrew/brew` there. `~/.config/zsh/homebrew.zsh` finds it
+  (as well as the standard `/opt/homebrew` and `/usr/local`) and sends casks
+  to `~/Applications` when `/Applications` isn't writable. Outside the
+  standard location Homebrew has no prebuilt bottles, so **every formula
+  compiles from source**. `wget` alone means building OpenSSL and running
+  its test suite.
+- **Packages:** work machines install only the `work` section of
+  `packages.yaml`, not `common`. Keep it short, since everything there
+  compiles. Claude Code is in the personal section only.
+- **No 1Password there.** SSH uses macOS's built-in agent, and the repo is
+  pulled over HTTPS, so no key is needed. Work machines never push.
+- **Git email:** the work address you enter at `init`.
+
+Bootstrap without `--apply`, and review before anything is overwritten:
+
+```sh
+cd ~ && sh -c "$(curl -fsLS get.chezmoi.io)"   # installs chezmoi into ~/bin
+~/bin/chezmoi init rescriba01                   # answer: work, work email, daily sync
+cp ~/.zshrc ~/.zshrc.pre-chezmoi                # keep the current one
+~/bin/chezmoi diff                              # review what would change
+~/bin/chezmoi apply
+```
 
 ## New machine migration checklist
 
@@ -66,7 +104,7 @@ SSH (1Password agent), so pushes need 1Password unlocked.
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply rescriba01
 ```
 
-Answer the machine-type prompt (`personal` or `work`). This applies all
+Answer the prompts (`personal`, daily sync yes). This applies all
 tracked dotfiles, runs `run_once_after_macos-defaults.sh`
 (Dock/keyboard/Finder/screenshot preferences), and runs the Homebrew
 installer script (formulae, casks, Mac App Store apps, VS Code
