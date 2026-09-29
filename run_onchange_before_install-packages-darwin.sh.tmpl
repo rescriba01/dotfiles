@@ -3,6 +3,7 @@
 # Package lists live in .chezmoidata/packages.yaml; this re-runs when they change.
 # Personal machines install common + personal; work machines install only the
 # work section (non-admin, and every formula compiles from source there).
+# VS Code extensions always include the common list.
 # Homebrew found at render time (re-runs once it's installed):
 # {{ output "sh" "-c" "ls -d /opt/homebrew/bin/brew /usr/local/bin/brew $HOME/.homebrew/bin/brew 2>/dev/null; true" | sha256sum }}
 
@@ -31,10 +32,9 @@ eval "$("$brew" shellenv)"
 [ -w /Applications ] || export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 
 {{ $sets := list (index .packages.darwin .machineType) -}}
-{{ $vscode := index .packages.vscode .machineType -}}
+{{ $vscode := concat .packages.vscode.common (index .packages.vscode .machineType) -}}
 {{ if ne .machineType "work" -}}
 {{   $sets = prepend $sets .packages.darwin.common -}}
-{{   $vscode = concat .packages.vscode.common $vscode -}}
 {{ end -}}
 # --no-upgrade: install what's missing, never upgrade what's there (run
 # `brew upgrade` deliberately). On Intel Macs and non-default prefixes Homebrew

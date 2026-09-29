@@ -9,3 +9,7 @@ sync-reports
 
 # The daily sync job only on machines that opted in at `chezmoi init`
 {{ if not .dailySync }}Library/LaunchAgents/com.rescriba01.chezmoi-sync.plist{{ end }}
+
+# Work machines keep their own VS Code settings (the email-editing setup lives
+# there); merge by hand before managing them from here
+{{ if eq .machineType "work" }}Library/Application Support/Code/User/settings.json{{ end }}

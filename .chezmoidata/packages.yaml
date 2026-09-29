@@ -105,15 +105,39 @@ packages:
       - { name: "Playlisty for Apple Music", id: 1459275972 }
     work:
       taps: []
-      brews: []
+      # Homebrew in ~/.homebrew compiles every formula from source, so
+      # anything added here is a long build.
+      brews:
+      - "bat"
+      - "lsd"
+      - "luarocks"
+      - "ncdu"
+      - "neovim"
+      - "node"
+      - "nvm"
+      - "ripgrep"
+      - "starship"
+      - "tmux"
+      - "tre-command"
+      - "wget"
       brews_unlinked: []
       brews_arm64_only: []
-      casks: []
+      casks:
+      - "1password-cli"
+      - "arc"
+      - "firefox@developer-edition"
+      - "font-overpass"
+      - "font-rubik"
+      - "maccy"
+      - "obsidian"
+      - "raycast"
+      - "visual-studio-code"
       mas: []
+  # VS Code extensions (default profile). "common" installs everywhere; these
+  # are per-user installs that need no admin rights and no compiling.
   vscode:
     common:
       - "bmewburn.vscode-intelephense-client"
-      - "cacher.cacher-vscode"
       - "christian-kohler.path-intellisense"
       - "dbaeumer.vscode-eslint"
       - "deerawan.vscode-dash"
@@ -122,12 +146,9 @@ packages:
       - "dustinsanders.an-old-hope-theme-vscode"
       - "eamodio.gitlens"
       - "ecmel.vscode-html-css"
-      - "equinusocio.vsc-material-theme"
-      - "equinusocio.vsc-material-theme-icons"
       - "esbenp.prettier-vscode"
       - "formulahendry.auto-close-tag"
       - "formulahendry.auto-rename-tag"
-      - "gruntfuggly.todo-tree"
       - "ibm.output-colorizer"
       - "johnpapa.vscode-peacock"
       - "jzmstrjp.color-the-tag-name"
@@ -135,12 +156,10 @@ packages:
       - "mechatroner.rainbow-csv"
       - "mgmcdermott.vscode-language-babel"
       - "moshfeu.compare-folders"
-      - "ms-azuretools.vscode-containers"
       - "ms-azuretools.vscode-docker"
       - "ms-python.debugpy"
       - "ms-python.python"
       - "ms-python.vscode-pylance"
-      - "ms-toolsai.jupyter"
       - "ms-vscode-remote.remote-containers"
       - "ms-vsliveshare.vsliveshare"
       - "neilbrayfield.php-docblocker"
@@ -160,5 +179,36 @@ packages:
       - "xdebug.php-pack"
       - "zhuangtongfa.material-theme"
       - "zignd.html-css-class-completion"
-    personal: []
-    work: []
+    personal:
+      - "cacher.cacher-vscode"
+      - "equinusocio.vsc-material-theme"
+      - "equinusocio.vsc-material-theme-icons"
+      - "gruntfuggly.todo-tree"
+      - "ms-azuretools.vscode-containers"
+      - "ms-toolsai.jupyter"
+    work:
+      - "aaron-bond.better-comments"
+      - "adpyke.codesnap"
+      - "alefragnani.bookmarks"
+      - "antonreshetov.masscode-assistant"
+      - "buenon.scratchpads"
+      - "cardinal90.multi-cursor-case-preserve"
+      - "davidanson.vscode-markdownlint"
+      - "editorconfig.editorconfig"
+      - "figma.figma-vscode-extension"
+      - "humao.rest-client"
+      - "jakob101.relativepath"
+      - "johnbillion.vscode-wordpress-hooks"
+      - "ms-vscode-remote.remote-ssh"
+      - "ms-vscode-remote.remote-ssh-edit"
+      - "ms-vscode.live-server"
+      - "ms-vscode.remote-explorer"
+      - "postman.postman-for-vscode"
+      - "randomfractalsinc.snippets-viewer"
+      - "rifi2k.format-html-in-php"
+      - "rvest.vs-code-prettier-eslint"
+      - "simonsiefke.svg-preview"
+      - "spotmar.email-editing-tools-by-spotmar"
+      - "streetsidesoftware.code-spell-checker"
+      - "timonwong.shellcheck"
+      - "zobo.php-intellisense"
