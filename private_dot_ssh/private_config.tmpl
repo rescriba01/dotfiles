@@ -1,3 +1,7 @@
+# Machine-specific hosts that don't belong in the public dotfiles repo.
+# Must come before "Host *"; a missing file is ignored.
+Include ~/.ssh/config.local
+
 Host *
   AddKeysToAgent yes
 {{- if eq .chezmoi.os "darwin" }}

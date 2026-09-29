@@ -192,6 +192,9 @@ alias setup-theme-link='mkdir -p ~/DevKinsta/public/one-impulse/wp-content/theme
 # Starship Theme
 eval "$(starship init zsh)"
 
+# Machine-specific settings that don't belong in the public dotfiles repo
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
 # Drop duplicate PATH entries, keeping the first occurrence. Must stay last:
 # `export PATH=...` (used above and by nvm/Volta) bypasses the uniqueness flag.
 typeset -U path
