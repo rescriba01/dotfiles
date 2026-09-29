@@ -154,7 +154,7 @@ own install — that's normal. This step takes a while; it's installing
   intentionally left untouched — not migrated, not deleted. Revisit
   separately.
 - This repo is public. A defunct client's staging hostname + admin
-  username exists in git history (commit `78990a8`, since removed from
+  username exists in git history (commit `56a4cbb`, since removed from
   the current file) — accepted as low-stakes rather than rewriting
   history.
 - `php@7.4`, `docker-machine`, `vagrant`, and `virtualbox` were dropped
