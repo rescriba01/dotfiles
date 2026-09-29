@@ -1,0 +1,78 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	//
+	// You can also restrict snippets to specific files using include/exclude patterns:
+	// "Test snippet": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "test",
+	// 	"body": "test('$1', () => {\n\t$0\n});",
+	// 	"include": ["**/*.test.ts", "*.spec.ts"],
+	// 	"exclude": ["**/temp/*.ts"],
+	// 	"description": "Insert test block"
+	// }
+
+	"HTML5 Boilerplate": {
+		"scope": "html",
+		"prefix": "html5boiler",
+		"body": [
+			"<!DOCTYPE html>",
+			"<html lang=\"en\" class=\"no-js\">",
+			"<head>",
+			"  <meta charset=\"UTF-8\">",
+			"  <meta name=\"viewport\" content=\"width=device-width\">",
+			"  <meta name=\"text-scale\" content=\"scale\">",
+			"",
+			"  <title>${1:Unique page title} - ${2:My Site}</title>",
+			"",
+			"  <script src=\"/js/render-blocking-scripts.js\"></script>",
+			"  <script>",
+			"    document.documentElement.classList.replace('no-js', 'js');",
+			"  </script>",
+			"",
+			"  <link rel=\"stylesheet\" href=\"/css/styles.css\">",
+			"  <link rel=\"stylesheet\" href=\"/css/print.css\" media=\"print\">",
+			"",
+			"  <script src=\"/js/non-render-blocking-script.js\" type=\"module\"></script>",
+			"",
+			"  <link rel=\"icon\" href=\"/favicon.ico\">",
+			"  <link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\">",
+			"  <link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">",
+			"  <link rel=\"manifest\" href=\"/site.webmanifest\">",
+			"",
+			"  <link rel=\"canonical\" href=\"${3:https://web.site/page}\">",
+			"  <link rel=\"alternate\" type=\"text/markdown\" href=\"${3:https://web.site/page}.md\">",
+			"  <link rel=\"me\" href=\"https://mastodon.social/@${4:username}\">",
+			"  <link rel=\"site.standard.publication\" href=\"at://[DID]/site.standard.publication/[RKEY]\">",
+			"",
+			"  <meta name=\"description\" content=\"${5:Page description}\">",
+			"  <meta property=\"og:image\" content=\"${6:https://web.site/sm.jpg}\">",
+			"  <meta property=\"og:url\" content=\"${3:https://web.site/page}\">",
+			"  <meta name=\"theme-color\" content=\"${7:#FF5302}\">",
+			"  <meta property=\"fediverse:creator\" content=\"@${4:username}@mastodon.social\">",
+			"</head>",
+			"",
+			"<body>",
+			"  <!-- Content -->",
+			"  $0",
+			"  <script src=\"/js/non-render-blocking-script.js\"></script>",
+			"</body>",
+			"</html>"
+		],
+		"description": "Matuzo-style HTML5 boilerplate for custom/new site work"
+	}
+}

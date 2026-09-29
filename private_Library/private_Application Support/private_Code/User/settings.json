@@ -1,118 +1,103 @@
 {
-  "workbench.iconTheme": "material-icon-theme",
-  "editor.linkedEditing": true,
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "phpcs.executablePath": "/Users/rescribano/.composer/vendor/bin/phpcs",
-  "editor.fontFamily": "'JetBrains Mono', Fira Code, Menlo, monospace",
-  "editor.fontSize": 16,
-  "editor.fontLigatures": true,
-  "editor.wordWrap": "on",
-  "editor.formatOnSaveMode": "file",
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "files.autoSave": "afterDelay",
-  "eslint.format.enable": true,
-  "eslint.lintTask.enable": true,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "workbench.colorTheme": "An Old Hope",
-  "editor.formatOnSave": true,
-  "prettier.jsxSingleQuote": true,
-  "emmet.syntaxProfiles": {
-    "javascript": "jsx",
-    "xml": {
-      "attr_quotes": "single"
-    }
-  },
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
-  },
-  "prettier.singleQuote": true,
-  "liveServer.settings.donotShowInfoMsg": true,
-  "terminal.external.osxExec": "iTerm.app",
-  "workbench.colorCustomizations": {
-    "[Material Theme Ocean]": {}
-  },
-  "bracket-pair-colorizer-2.colors": ["Gold", "Orchid", "LightSkyBlue"],
-  "bracket-pair-colorizer-2.excludedLanguages": [],
-  "yaml.schemas": {
-    "file:///Users/rescribano/.vscode/extensions/atlassian.atlascode-3.0.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-  },
-  "atlascode.jira.enabled": false,
-  "atlascode.jira.jqlList": [
-    {
-      "id": "43337c6c-5be4-4787-b530-b6afbc6eea97",
-      "enabled": true,
-      "name": "My saltwaterco Issues",
-      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
-      "siteId": "1ad2ce9a-52f7-4bde-bcec-51597441ef73",
-      "monitor": true
-    }
-  ],
-  "redhat.telemetry.enabled": true,
-  "html-css-class-completion.enableEmmetSupport": true,
-  "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
-  "sync.gist": "ca1d4873e74dc9c07595537162b1628c",
-  // PHPCS
-  "phpcs.composerJsonPath": "/Users/rescribano/composer.json",
-  "phpcs.enable": true,
-  "phpcs.standard": "WordPress",
-  "phpcs.showWarnings": true,
-  "liveServer.settings.donotVerifyTags": true,
-  "todo-tree.general.tags": [
-    "BUG",
-    "HACK",
-    "FIXME",
-    "TODO",
-    "XXX",
-    "[ ]",
-    "[x]"
-  ],
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "liveSassCompile.settings.excludeList": [
-    "**/node_modules/**",
-    ".vscode/**",
-    "**/wp-content/plugins/**"
-  ],
-  "liveSassCompile.settings.formats": [
-    {
-      "format": "compressed",
-      "extensionName": ".css",
-      "savePath": "~/../css/"
-    }
-  ],
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
-  },
-  "vscode-edge-devtools.headless": true,
-  "vscode-edge-devtools.mirrorEdits": true,
-  "files.associations": {
-    "*.html": "html-hubl",
-    "*.css": "css"
-  },
-  "material-icon-theme.activeIconPack": "react",
-  "emmet.triggerExpansionOnTab": true,
-  "html.format.indentHandlebars": true,
-  "html.format.indentInnerHtml": true,
-  "editor.inlineSuggest.enabled": true,
-  "atlascode.bitbucket.enabled": false,
-  "security.workspace.trust.untrustedFiles": "open",
-  "workbench.startupEditor": "none",
-  "css.enabledLanguages": [
-    []
-  ],
-  "workbench.statusBar.visible": false,
-  "terminal.integrated.fontSize": 15,
-  "github.copilot.editor.enableAutoCompletions": false,
-  "github.copilot.enable": {
-    "markdown": "true"
-  },
-  "intelephense.files.maxSize": 3000000,
+    "copilot.chat.enabledLanguages": [
+        "shellscript, shellscript (bash), shell, powershell, bash, sh",
+    ],
+    "workbench.iconTheme": "material-icon-theme",
+    "terminal.integrated.fontSize": 15,
+    "editor.linkedEditing": true,
+    "editor.accessibilitySupport": "off",
+    "css.format.newlineBetweenRules": true,
+    "css.format.newlineBetweenSelectors": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.fontFamily": "'JetBrains Mono', Fira Code, Menlo, monospace",
+    "editor.fontSize": 16,
+    "editor.fontLigatures": true,
+    "editor.wordWrap": "on",
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "prettier.useTabs": false,
+    "prettier.tabWidth": 4,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "files.autoSave": "afterDelay",
+    "eslint.format.enable": false,
+    "eslint.lintTask.enable": true,
+    "workbench.colorTheme": "An Old Hope",
+    "editor.formatOnSave": true,
+    "prettier.jsxSingleQuote": true,
+    "prettier.htmlWhitespaceSensitivity": "css",
+    "prettier.singleAttributePerLine": false,
+    "emmet.syntaxProfiles": {
+        "javascript": "jsx",
+        "xml": {
+            "attr_quotes": "single",
+        },
+    },
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "css": "css",
+    },
+    // Emmet: stop abbreviation matches from cluttering the suggestion list
+    "emmet.showAbbreviationSuggestions": false,
+    "prettier.singleQuote": false,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "terminal.external.osxExec": "iTerm.app",
+    "workbench.colorCustomizations": {
+        "[Material Theme Ocean]": {},
+    },
+    "bracket-pair-colorizer-2.colors": ["Gold", "Orchid", "LightSkyBlue"],
+    "bracket-pair-colorizer-2.excludedLanguages": [],
+    "redhat.telemetry.enabled": true,
+    "html-css-class-completion.enableEmmetSupport": true,
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    // PHPCS
+    "phpcs.enable": true,
+    "phpcs.standard": "WordPress",
+    "phpcs.showWarnings": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "javascript.suggest.paths": false,
+    "typescript.suggest.paths": false,
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "XXX",
+        "[ ]",
+        "[x]",
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "liveSassCompile.settings.excludeList": [
+        "**/node_modules/**",
+        ".vscode/**",
+        "**/wp-content/plugins/**",
+    ],
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "compressed",
+            "extensionName": ".css",
+            "savePath": "~/../css/",
+        },
+    ],
+    "vscode-edge-devtools.headless": true,
+    "vscode-edge-devtools.mirrorEdits": true,
+    "files.associations": {
+        "*.css": "css",
+    },
+    "material-icon-theme.activeIconPack": "react",
+    "emmet.triggerExpansionOnTab": true,
+    "html.format.indentHandlebars": true,
+    "html.format.indentInnerHtml": true,
+    "editor.inlineSuggest.enabled": true,
+    "atlascode.bitbucket.enabled": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "workbench.startupEditor": "none",
+    "css.enabledLanguages": [[]],
+    "eslint.codeActionsOnSave.rules": null,
     "intelephense.stubs": [
         "apache",
         "bcmath",
@@ -159,6 +144,7 @@
         "Phar",
         "posix",
         "pspell",
+        "random",
         "readline",
         "Reflection",
         "session",
@@ -185,11 +171,106 @@
         "Zend OPcache",
         "zip",
         "zlib",
-        "wordpress"
+        "wordpress",
     ],
-    "intelephense.files.associations": [
-      
-      "*.php",
-      "*.phtml"
-    ]
+    "figma.autocompleteBlocks": true,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "better-comments.tags": [
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+        {
+            "tag": "*",
+            "color": "#98C379",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+        },
+    ],
+    "better-comments.highlightPlainText": true,
+    "codesnap.shutterAction": "copy",
+    "editor.quickSuggestionsDelay": 1500,
+    "editor.hover.delay": 1500,
+    "peacock.favoriteColors": [
+        { "name": "Angular Red", "value": "#dd0531" },
+        { "name": "Azure Blue", "value": "#007fff" },
+        { "name": "JavaScript Yellow", "value": "#f9e64f" },
+        { "name": "Mandalorian Blue", "value": "#1857a4" },
+        { "name": "Node Green", "value": "#215732" },
+        { "name": "React Blue", "value": "#61dafb" },
+        { "name": "Something Different", "value": "#832561" },
+        { "name": "Svelte Orange", "value": "#ff3d00" },
+        { "name": "Vue Green", "value": "#42b883" },
+    ],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "chat.instructionsFilesLocations": {
+        ".github/instructions": true,
+        ".claude/rules": true,
+        "~/.copilot/instructions": true,
+        "~/.claude/rules": true,
+        "/var/folders/km/gzcvrpf52dnfcg9cchzbn80m0000gp/T/postman-collections-post-response.instructions.md": true,
+        "/var/folders/km/gzcvrpf52dnfcg9cchzbn80m0000gp/T/postman-collections-pre-request.instructions.md": true,
+        "/var/folders/km/gzcvrpf52dnfcg9cchzbn80m0000gp/T/postman-folder-post-response.instructions.md": true,
+        "/var/folders/km/gzcvrpf52dnfcg9cchzbn80m0000gp/T/postman-folder-pre-request.instructions.md": true,
+        "/var/folders/km/gzcvrpf52dnfcg9cchzbn80m0000gp/T/postman-http-request-post-response.instructions.md": true,
+        "/var/folders/km/gzcvrpf52dnfcg9cchzbn80m0000gp/T/postman-http-request-pre-request.instructions.md": true,
+    },
+    "chat.mcp.gallery.enabled": true,
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "chat.viewSessions.orientation": "stacked",
+    "editor.snippetSuggestions": "top",
+
+    // --- Snippet workflow tweaks (from the Email Editing Tools extension's guide) ---
+    // Tab only expands a matched snippet prefix; doesn't fight with plain indentation.
+    // Watch this against editor.inlineSuggest.enabled + emmet.triggerExpansionOnTab —
+    // if Tab ever does something unexpected, this is the setting to revisit first.
+    "editor.tabCompletion": "onlySnippets",
+
+    // --- Requires the "Snippets Viewer" extension (RandomFractals.snippets-viewer) ---
+    // These four are no-ops until that extension is installed.
+    // skipLanguageSnippets trimmed from the article's version to NOT hide
+    // php/javascript/typescript, since you use those daily.
+    "snippets.viewer.expandSnippetFiles": true,
+    "snippets.viewer.focusOnActiveEditorSnippets": true,
+    "snippets.viewer.showOnlyActiveEditorLanguageSnippets": true,
+    "snippets.viewer.skipLanguageSnippets": "vb,swift,fsharp,csharp,cpp,c,coffeescript,bat,groovy",
+    "snippets.viewer.sortSnippetsByName": false,
+    "window.newWindowProfile": "Default",
 }
