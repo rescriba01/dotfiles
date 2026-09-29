@@ -36,6 +36,12 @@ eval "$("$brew" shellenv)"
 {{ if ne .machineType "work" -}}
 {{   $sets = prepend $sets .packages.darwin.common -}}
 {{ end -}}
+# Fonts: --force lets Homebrew replace hand-installed copies with the same
+# filenames in ~/Library/Fonts (brew bundle has no way to pass it)
+for font in {{ range .packages.darwin.fonts }}{{ . | quote }} {{ end }}; do
+    brew list --cask "$font" >/dev/null 2>&1 || brew install --cask --force "$font"
+done
+
 # --no-upgrade: install what's missing, never upgrade what's there (run
 # `brew upgrade` deliberately). On Intel Macs and non-default prefixes Homebrew
 # has no bottles, so an upgrade means compiling from source.
@@ -46,6 +52,8 @@ brew bundle --no-upgrade --file=/dev/stdin <<BREWFILE
 {{ end }}{{ range .brews_unlinked }}brew {{ . | quote }}, link: false
 {{ end }}{{ if eq $.chezmoi.arch "arm64" }}{{ range .brews_arm64_only }}brew {{ . | quote }}
 {{ end }}{{ end }}{{ end -}}
+{{ range .packages.darwin.fonts }}cask {{ . | quote }}
+{{ end -}}
 {{ range $sets }}{{ range .casks }}cask {{ . | quote }}
 {{ end }}{{ end -}}
 {{ if .isAdmin }}{{ range $sets }}{{ range .mas }}mas {{ .name | quote }}, id: {{ .id }}

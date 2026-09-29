@@ -7,6 +7,19 @@
 # re-runs the installer on the next `chezmoi apply`.
 packages:
   darwin:
+    # Fonts install on every Mac (into ~/Library/Fonts, no admin needed).
+    # The installer uses --force for ones not yet installed, so it replaces
+    # hand-installed copies with the same filenames.
+    fonts:
+      - "font-consolas-for-powerline"
+      - "font-fira-code-nerd-font"
+      - "font-fira-mono-for-powerline"
+      - "font-iosevka-nerd-font"
+      - "font-jetbrains-mono"
+      - "font-jetbrains-mono-nerd-font"
+      - "font-meslo-for-powerlevel10k"
+      - "font-overpass"
+      - "font-rubik"
     common:
       taps:
       - "homebrew/bundle"
@@ -71,7 +84,6 @@ packages:
       - "docker-desktop"
       - "figma"
       - "firefox@developer-edition"
-      - "font-consolas-for-powerline"
       - "local"
       - "microsoft-auto-update"
       - "microsoft-edge"
@@ -97,6 +109,8 @@ packages:
       brews_arm64_only: []
       casks:
       - "claude-code"
+      # Apple's installer needs admin rights, so personal Macs only
+      - "font-sf-mono"
       - "discord"
       - "dropbox"
       - "pocket-casts"
@@ -126,8 +140,6 @@ packages:
       - "1password-cli"
       - "arc"
       - "firefox@developer-edition"
-      - "font-overpass"
-      - "font-rubik"
       - "maccy"
       - "obsidian"
       - "raycast"
