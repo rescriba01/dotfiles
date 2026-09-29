@@ -9,3 +9,19 @@ sync-reports
 
 # The daily sync job only on machines that opted in at `chezmoi init`
 {{ if not .dailySync }}Library/LaunchAgents/com.rescriba01.chezmoi-sync.plist{{ end }}
+
+# Per-machine-type files: each machine gets only its own type's versions
+{{ if eq .machineType "work" }}
+.zprofile
+.profile
+.config/starship.toml
+.config/zsh/personal
+.config/zsh/personal/**
+.config/nvim/lua/config/machine_personal.lua
+{{ else }}
+.config/zsh/work
+.config/zsh/work/**
+.config/starship
+.config/starship/**
+.config/nvim/lua/config/machine_work.lua
+{{ end }}

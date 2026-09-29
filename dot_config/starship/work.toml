@@ -1,0 +1,82 @@
+# Starship Creative Config (Work Edition)
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Always add a new line for readability
+add_newline = true
+
+# Custom layout: top bar + bottom bar with time/date
+format = """
+[┌───────────────⟦](bold cyan)$username${env_var.STARSHIP_ORG_LABEL}$directory[⟧──](bold cyan)$time[──────────────](bold cyan)
+[│](bold cyan) $git_branch$git_commit$git_state$nodejs$docker_context$aws
+[└─](bold cyan)$character 
+"""
+
+# Username — bold magenta with emoji
+[username]
+style_user = "bold magenta"
+format = "👤 [$user]($style) "
+show_always = true
+
+# Organization label in place of the hostname. The text comes from
+# STARSHIP_ORG_LABEL (set in ~/.zshrc.local); hidden when it's unset.
+[env_var.STARSHIP_ORG_LABEL]
+format = "🔌 [$env_value](bold blue) "
+
+# Directory — truncate but flashy with folder icon
+[directory]
+format = "📂 [$path]($style)[$read_only]($read_only_style) "
+truncation_length = 3
+style = "bold yellow"
+read_only = " 🔒"
+read_only_style = "red"
+
+# Time/Date — dashboard-style with clock and calendar emojis
+[time]
+disabled = false
+style = "bold bright-white"
+format = "⏰ [$time]($style) "
+time_format = "%H:%M 📅 %Y-%m-%d"
+use_12hr = false
+
+# Git Branch — make it stand out with plant emoji + magenta
+[git_branch]
+symbol = "🌱 "
+style = "bold bright-magenta"
+truncation_length = 8
+format = "[$symbol$branch]($style) "
+
+# Git State (e.g. merge, rebase)
+[git_state]
+style = "bold red"
+format = "[$state( $progress_current/$progress_total)]($style) "
+
+# NodeJS — with neon green and logo
+[nodejs]
+symbol = "⬢ "
+style = "bold bright-green"
+format = "[$symbol$version]($style) "
+
+# Docker — whale emoji in blue
+[docker_context]
+symbol = "🐳 "
+style = "bold bright-blue"
+format = "[$symbol$context]($style) "
+
+# AWS — yellow bold with a cloud
+[aws]
+symbol = "☁️ "
+style = "bold yellow"
+format = "[$symbol($profile )(\\($region\\))]($style) "
+
+# Memory — for fun, shows RAM with brain emoji
+[memory_usage]
+symbol = "🧠 "
+style = "bold purple"
+format = "$symbol [${ram}]($style) "
+disabled = false
+
+# Character (prompt symbol)
+[character]
+success_symbol = "[➜](bold green) "
+error_symbol = "[✗](bold red) "
+vicmd_symbol = "[❮❮](bold cyan) "

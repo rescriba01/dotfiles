@@ -63,6 +63,7 @@ Bootstrap without `--apply`, and review before anything is overwritten:
 
 ```sh
 cd ~ && sh -c "$(curl -fsLS get.chezmoi.io)"   # installs chezmoi into ~/bin
+echo "$PATH" | tr ':' '\n' > ~/path-before.txt  # baseline, from a new terminal tab
 ~/bin/chezmoi init rescriba01                   # answer: work, work email, daily sync
 ~/bin/chezmoi managed --include=files --path-style=relative \
   | tar -czf ~/pre-chezmoi-backup.tgz -C ~ -T - 2>/dev/null   # back up files it will replace
@@ -70,10 +71,35 @@ cd ~ && sh -c "$(curl -fsLS get.chezmoi.io)"   # installs chezmoi into ~/bin
 ~/bin/chezmoi apply
 ```
 
+Then, in a new terminal tab, confirm PATH didn't change:
+
+```sh
+echo "$PATH" | tr ':' '\n' | diff ~/path-before.txt - && echo "PATH unchanged"
+```
+
 Anything machine-specific that `diff` would remove (extra aliases, SSH
 hosts, git settings) goes in `~/.zshrc.local`, `~/.ssh/config.local` or
 `~/.gitconfig.local`. The managed files load those if they exist, and they
-never enter this repo.
+never enter this repo. The work Starship prompt shows a label from
+`STARSHIP_ORG_LABEL`, so set it there too:
+`echo 'export STARSHIP_ORG_LABEL="<label>"' >> ~/.zshrc.local`.
+
+## What differs per machine type
+
+Shared files are the same everywhere; each machine type adds its own pieces,
+and chezmoi deploys only the current type's (see `.chezmoiignore`).
+
+| | Shared | Personal | Work |
+| --- | --- | --- | --- |
+| zsh | `~/.zshrc` | `~/.config/zsh/personal/{env,aliases}.zsh`, `.zprofile`, `.profile` | `~/.config/zsh/work/{env,aliases}.zsh` |
+| Starship | | `~/.config/starship.toml` | `~/.config/starship/work.toml` (via `STARSHIP_CONFIG`) |
+| LazyVim | `~/.config/nvim` | | `lua/config/machine_work.lua` (autoformat off) |
+| Packages | fonts, VS Code `common` | `common` + `personal` | `work` |
+| Git / SSH | `.gitconfig`, `~/.ssh/config` | 1Password SSH agent | work email |
+
+`env.zsh` holds PATH and environment and loads before nvm and oh-my-zsh;
+`aliases.zsh` loads after oh-my-zsh. The claudecode LazyVim extra only loads
+where the `claude` CLI exists.
 
 ## New machine migration checklist
 
