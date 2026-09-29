@@ -64,10 +64,16 @@ Bootstrap without `--apply`, and review before anything is overwritten:
 ```sh
 cd ~ && sh -c "$(curl -fsLS get.chezmoi.io)"   # installs chezmoi into ~/bin
 ~/bin/chezmoi init rescriba01                   # answer: work, work email, daily sync
-cp ~/.zshrc ~/.zshrc.pre-chezmoi                # keep the current one
+~/bin/chezmoi managed --include=files --path-style=relative \
+  | tar -czf ~/pre-chezmoi-backup.tgz -C ~ -T - 2>/dev/null   # back up files it will replace
 ~/bin/chezmoi diff                              # review what would change
 ~/bin/chezmoi apply
 ```
+
+Anything machine-specific that `diff` would remove (extra aliases, SSH
+hosts, git settings) goes in `~/.zshrc.local`, `~/.ssh/config.local` or
+`~/.gitconfig.local`. The managed files load those if they exist, and they
+never enter this repo.
 
 ## New machine migration checklist
 
